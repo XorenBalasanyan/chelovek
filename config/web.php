@@ -17,47 +17,44 @@ $config = [
         ],
         'admin' => [
             'class' => 'app\modules\admin\Module',
+            'as access' => [
+                'class' => 'yii\filters\AccessControl',
+                'ruleConfig' => [
+                    'class' => 'dektrium\user\filters\AccessRule',
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ]
+                ]
+            ],
         ],
     ],
     'components' => [
-        // 'view' => [
-        //     'theme' => [
-        //         'pathMap' => [
-        //             '@mdm/admin' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
+        // 'authClientCollection' => [
+        //     'class' => yii\authclient\Collection::className(),
+        //     'clients' => [
+        //         'facebook' => [
+        //             'class'        => 'dektrium\user\clients\Facebook',
+        //             'clientId'     => 'CLIENT_ID',
+        //             'clientSecret' => 'CLIENT_SECRET',
+        //         ],
+        //         'twitter' => [
+        //             'class'          => 'dektrium\user\clients\Twitter',
+        //             'consumerKey'    => 'CONSUMER_KEY',
+        //             'consumerSecret' => 'CONSUMER_SECRET',
+        //         ],
+        //         'google' => [
+        //             'class'        => 'dektrium\user\clients\Google',
+        //             'clientId'     => 'CLIENT_ID',
+        //             'clientSecret' => 'CLIENT_SECRET',
         //         ],
         //     ],
         // ],
-        // 'assetManager' => [
-        //     'bundles' => [
-        //         'dmstr\web\AdminLteAsset' => [
-        //             'skin' => 'skin-black',
-        //         ],
-        //     ],
-        // ],
-        'authClientCollection' => [
-            'class' => yii\authclient\Collection::className(),
-            'clients' => [
-                // 'facebook' => [
-                //     'class'        => 'dektrium\user\clients\Facebook',
-                //     'clientId'     => 'CLIENT_ID',
-                //     'clientSecret' => 'CLIENT_SECRET',
-                // ],
-                // 'twitter' => [
-                //     'class'          => 'dektrium\user\clients\Twitter',
-                //     'consumerKey'    => 'CONSUMER_KEY',
-                //     'consumerSecret' => 'CONSUMER_SECRET',
-                // ],
-                // 'google' => [
-                //     'class'        => 'dektrium\user\clients\Google',
-                //     'clientId'     => 'CLIENT_ID',
-                //     'clientSecret' => 'CLIENT_SECRET',
-                // ],
-            ],
-        ],
-
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'Ei_w6VipK56q7g98QhDQkfqIvEeWvekV',
+            'cookieValidationKey' => 'tZwPPF5FMPAdP9FhsR5PMvgQrAZIq_cA',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -74,7 +71,16 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            // 'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'test.mail.9999@yandex.ru',
+                'password' => 'password2016',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -86,14 +92,12 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-
     ],
     'params' => $params,
 ];

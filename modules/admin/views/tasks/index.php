@@ -19,28 +19,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'intime',
-            // [
-            //     'attribute' => 'user_id',
-            //     'content' => function($data){
-            //         return $data->user->name;
-            //     },
-            // ],
+            [
+                'attribute' => 'user_id',
+                'content' => function($data){
+                    if ($u = $data->user) {
+                        return $u->name;
+                    }
+                },
+            ],
             [
                 'attribute' => 'category_id',
                 'content' => function($data){
-                    return $data->category->name;
+                    if ($c = $data->category) {
+                        return $c->name;
+                    }
                 },
             ],
             'title',
             // 'description:ntext',
-            // 'deadline',
-            // 'cost',
-            // 'views',
-            // 'status',
+            'deadline',
+            'cost',
+            'views',
+            'status',
             // 'hidden',
             // 'review',
 

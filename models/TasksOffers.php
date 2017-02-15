@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use dektrium\user\models\User;
 /**
  * This is the model class for table "tasks_offers".
  *
@@ -36,6 +36,14 @@ class TasksOffers extends \yii\db\ActiveRecord
             [['user_id', 'task_id', 'cost', 'status'], 'integer'],
             [['comment'], 'string'],
         ];
+    }
+
+    public function getTask(){
+        return $this->hasOne(Tasks::classname(),['id' => 'task_id']);
+    }
+
+    public function getUser(){
+        return $this->hasOne(User::classname(),['id' => 'user_id']);
     }
 
     /**

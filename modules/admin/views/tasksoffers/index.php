@@ -19,14 +19,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'intime',
-            'user_id',
-            'task_id',
+            [
+                'attribute' => 'user_id',
+                'content' => function($data){
+                    if ($u = $data->user) {
+                        return $u->name;
+                    }
+                },
+            ],
+            [
+                'attribute' => 'task_id',
+                'content' => function($data){
+                    if ($t = $data->task) {
+                        return $t->title;
+                    }
+                },
+            ],
             'cost',
-            // 'comment:ntext',
+            'comment:ntext',
             // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],
