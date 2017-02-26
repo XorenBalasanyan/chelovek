@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use dektrium\user\models\User;
 /**
  * This is the model class for table "tasks_comments".
  *
@@ -38,19 +38,31 @@ class TasksComments extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getUser(){
+        return $this->hasOne(User::classname(),['id' => 'user_id']);
+    }
+
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
+            'id' => '#',
+            'user_id' => 'Имя пользователя',
             'task_id' => 'Task ID',
             'parent_id' => 'Parent ID',
-            'date' => 'Date',
-            'text' => 'Text',
-            'moderated' => 'Moderated',
+            'date' => 'Дата',
+            'text' => 'Текст комментария',
+            'moderated' => 'Модерация',
+        ];
+    }
+
+    public function getModerated()
+    {
+        return [
+            '0' => 'Отключено',
+            '1' => 'Включено',
         ];
     }
 }

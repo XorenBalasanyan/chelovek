@@ -58,18 +58,26 @@ class Tasks extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'intime' => 'Intime',
-            'user_id' => 'User ID',
-            'category_id' => 'Category ID',
-            'title' => 'Title',
+            'id' => '#',
+            'intime' => 'Дата создания',
+            'user_id' => 'Имя пользователя',
+            'category_id' => 'Категория',
+            'title' => 'Название',
             'description' => 'Description',
-            'deadline' => 'Deadline',
-            'cost' => 'Cost',
-            'views' => 'Views',
-            'status' => 'Status',
+            'deadline' => 'Дедлайн',
+            'cost' => 'Стоимость',
+            'views' => 'Просмотры',
+            'status' => 'Статус',
             'hidden' => 'Hidden',
             'review' => 'Review',
+        ];
+    }
+
+    public function getStatus()
+    {
+        return [
+            '1' => 'Вкл.',
+            '2' => 'Выкл.',
         ];
     }
 }

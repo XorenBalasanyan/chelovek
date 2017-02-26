@@ -6,20 +6,22 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tasks Offers';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Заявки';
 ?>
 <div class="tasks-offers-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Tasks Offers', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            'intime',
+            [
+                'attribute' => 'intime',
+                'content' => function($data){
+                    $date = new DateTime($data->intime);
+                    return $date->format('d.m.Y');
+                },
+            ],
             [
                 'attribute' => 'user_id',
                 'content' => function($data){
@@ -28,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
+            'comment:ntext',
+            'cost',
             [
                 'attribute' => 'task_id',
                 'content' => function($data){
@@ -36,8 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
-            'cost',
-            'comment:ntext',
             // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],

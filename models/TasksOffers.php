@@ -52,12 +52,12 @@ class TasksOffers extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'intime' => 'Intime',
-            'user_id' => 'User ID',
-            'task_id' => 'Task ID',
-            'cost' => 'Cost',
-            'comment' => 'Comment',
+            'id' => '#',
+            'intime' => 'Дата',
+            'user_id' => 'Имя пользователя',
+            'task_id' => 'Название задания',
+            'cost' => 'Стоимость',
+            'comment' => 'Текст заявки',
             'status' => 'Status',
         ];
     }

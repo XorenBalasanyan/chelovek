@@ -39,7 +39,7 @@ class Settings extends \yii\db\ActiveRecord
     {
         return [
             'key' => 'Key',
-            'value' => 'Value',
+            'value' => 'Телефон',
         ];
     }
 }

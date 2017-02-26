@@ -42,12 +42,12 @@ AppAsset::register($this);
             ['label' => 'Комментарии', 'url' => ['/admin/taskscomments/index']],
             ['label' => 'Настройки', 'url' => ['/admin/settings/index']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/user/login']]
+                ['label' => 'Войти', 'url' => ['/user/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/user/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Выйти (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -58,7 +58,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container  col-md-12">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -68,9 +68,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 
